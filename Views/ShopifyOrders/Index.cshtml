@@ -1,0 +1,85 @@
+﻿@{
+    Layout = "_Layout"; // Establece el layout principal
+}
+
+<!--AQUI INICIA EN CONTENIDO UNICO DE LA VISTA -->
+@section content {
+
+
+    
+
+
+    <div class="page-wrapper">
+        <div class="content container-fluid">
+
+            <div class="page-header">
+                <div class="content-page-header">
+                    <h5>Pedidos</h5>
+                    <div class="list-btn">
+                        <ul class="filter-list">
+                            <!--FILTRADO DEL TEMPLATE
+                            <li>
+                                <a class="btn btn-filters w-auto popup-toggle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Filter"><span class="me-2"><img src="assets/img/icons/filter-icon.svg" alt="filter"></span>Filter </a>
+                            </li>
+                            -->
+
+                            <li>
+                                <a class="btn btn-primary" href="add-customer.html"><i class="fa fa-plus-circle me-2" aria-hidden="true"></i>Agregar Pedido</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    @model List<AppClientesMexaba.Models.ShopifyOrder>
+
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card-table">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <!-- Tabla de clientes -->
+                        <table id="TablaShopifyOrders" class="table table-center table-hover datatable">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>#</th>
+                                    <th>ID de pedido</th>
+                                    <th>Cliente</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var order in Model)
+                                {
+                                    <tr>
+                                        <td>@order.Id</td>
+                                        <td>@order.CustomerName</td>
+                                        <td>@order.TotalAmount</td>
+                                        <!-- Agrega más celdas según las propiedades que deseas mostrar -->
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                        <!-- Fin de la tabla -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+<!--AQUI TERMINA EN CONTENIDO UNICO DE LA VISTA -->
+
+
+
+<!--AQUI INICIA LA SECCIÓN DE SCRIPTS DE LA VISTA-->
+@section scripts {
+
+
+}
+<!--AQUI TERMINA LA SECCIÓN DE SCRIPTS DE LA VISTA-->

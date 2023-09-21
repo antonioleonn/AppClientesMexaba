@@ -1,0 +1,137 @@
+﻿@{
+    Layout = "_Layout"; // Establece el layout principal
+  
+}
+
+
+
+ 
+
+
+
+   
+
+
+
+<!--AQUI INICIA EN CONTENIDO UNICO DE LA VISTA -->
+@section content {
+
+    <div class="page-wrapper">
+        <div class="content container-fluid">
+
+            <div class="page-header">
+                <div class="content-page-header">
+                    <h5>Agregar Cliente</h5>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <form action="add-customer.html#">
+                        <div class="card-body">
+                            <div class="form-group-item">
+                                <h5 class="form-title">Información para pre-alta</h5>
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label>Sucursal</label>
+                                            <input type="text" class="form-control" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label>Nombre</label>
+                                            <input type="text" class="form-control" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label>Apellido Paterno</label>
+                                            <input type="text" class="form-control" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label>Apellido Materno</label>
+                                            <input type="text" class="form-control" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label>Calle y número</label>
+                                            <input type="text" class="form-control" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label>Ciudad</label>
+                                            <input type="text" class="form-control" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label>Estado</label>
+                                            <input type="text" class="form-control" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label>Código Postal</label>
+                                            <input type="text" class="form-control" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label>Celular</label>
+                                            <input type="text" id="mobile_code" class="form-control" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="billing-btn">
+                                        <h5 class="form-title mb-0">Verificar número</h5>
+                                        <a href="add-customer.html#" class="btn btn-primary">Enviar</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group-customer customer-additional-form">
+                                <div class="row">
+                                    <h5 class="form-title">Continuar con el registro del Cliente</h5>
+                                    
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label>RFC</label>
+                                            <input type="text" class="form-control" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-12 col-sm-12">
+                                        <div class="form-group">
+                                            <label>Regimen Fiscal</label>
+                                            <input type="text" class="form-control" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-12 col-sm-12">
+                                        <div class="form-group">
+                                            <label>Uso del CFDI</label>
+                                            <input type="text" class="form-control" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-12 col-sm-12">
+                                        <div class="form-group">
+                                            <label>Correo Electónico</label>
+                                            <input type="text" class="form-control" placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="add-customer-btns text-end">
+                                <a href="customers.html" class="btn customer-btn-cancel">Cancelar</a>
+                                <a href="customers.html" class="btn customer-btn-save">Guardar</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<!--AQUI TERMINA EN CONTENIDO UNICO DE LA VISTA -->

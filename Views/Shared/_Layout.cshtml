@@ -1,52 +1,375 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - AppClientesMexaba</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/AppClientesMexaba.styles.css" asp-append-version="true" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <title>Mexaba Plataforma</title>
+    <meta name="author" content="Antonio León, Sistemas Mexaba" />
+
+    <link rel="shortcut icon" href="../../assets/img/favicon.png">
+
+    <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="../../assets/plugins/fontawesome/css/fontawesome.min.css">
+
+    <link rel="stylesheet" href="../../assets/plugins/fontawesome/css/all.min.css">
+
+    <link rel="stylesheet" href="../../assets/css/bootstrap-datetimepicker.min.css">
+
+    <link rel="stylesheet" href="../../assets/plugins/datatables/datatables.min.css">
+
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <link href="https://cdn.datatables.net/1.11.6/css/jquery.dataTables.min.css" rel="stylesheet" />
 </head>
+
+
+
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">AppClientesMexaba</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="CerrarSesion">Cerrar Sesión</a>
-                        </li>
-                    </ul>
+
+    <div class="main-wrapper">
+
+        <div class="header header-one">
+
+            <a href="javascript:void(0);" id="toggle_btn">
+                <span class="toggle-bars">
+                    <span class="bar-icons"></span>
+                    <span class="bar-icons"></span>
+                    <span class="bar-icons"></span>
+                    <span class="bar-icons"></span>
+                </span>
+            </a>
+
+            <!--INICIA SECCIÓN BUSCAR-->
+            <div class="top-nav-search">
+                <form>
+                    <input type="text" class="form-control" placeholder="Buscar aquí">
+                    <button class="btn" type="submit"><img src="../../assets/img/icons/search.svg" alt="img"></button>
+                </form>
+            </div>
+            <!--TERMINA SECCIÓN BUSCAR-->
+
+            <a class="mobile_btn" id="mobile_btn">
+                <i class="fas fa-bars"></i>
+            </a>
+
+
+            <!--INICIA SECCION SUPERIOR-->
+            <ul class="nav nav-tabs user-menu">
+
+
+
+                <li class="nav-item dropdown  flag-nav dropdown-heads">
+                    <a class="nav-link" data-bs-toggle="dropdown" href="index.html#" role="button">
+                        <i class="fa fa-bell"></i>
+                    </a>
+                    <div class="dropdown-menu notifications">
+                        <div class="topnav-dropdown-header">
+                            <span class="notification-title">Notifications</span>
+                            <a href="javascript:void(0)" class="clear-noti"> Clear All</a>
+                        </div>
+                        <div class="noti-content">
+                            <ul class="notification-list">
+                                <li class="notification-message">
+                                    <a href="profile.html">
+                                        <div class="media d-flex">
+                                            <span class="avatar avatar-sm">
+                                                <img class="avatar-img rounded-circle" alt
+                                                     src="../../assets/img/profiles/avatar-02.jpg">
+                                            </span>
+                                            <div class="media-body">
+                                                <p class="noti-details">
+                                                    <span class="noti-title">Brian Johnson</span>
+                                                    paid the invoice <span class="noti-title">#DF65485</span>
+                                                </p>
+                                                <p class="noti-time">
+                                                    <span class="notification-time">4 mins ago</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="notification-message">
+                                    <a href="profile.html">
+                                        <div class="media d-flex">
+                                            <span class="avatar avatar-sm">
+                                                <img class="avatar-img rounded-circle" alt
+                                                     src="../../assets/img/profiles/avatar-03.jpg">
+                                            </span>
+                                            <div class="media-body">
+                                                <p class="noti-details">
+                                                    <span class="noti-title">Marie Canales</span>
+                                                    has accepted your estimate <span class="noti-title">#GTR458789</span>
+                                                </p>
+                                                <p class="noti-time">
+                                                    <span class="notification-time">6 mins ago</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="notification-message">
+                                    <a href="profile.html">
+                                        <div class="media d-flex">
+                                            <div class="avatar avatar-sm">
+                                                <span class="avatar-title rounded-circle bg-primary-light">
+                                                    <i class="far fa-user"></i>
+                                                </span>
+                                            </div>
+                                            <div class="media-body">
+                                                <p class="noti-details">
+                                                    <span class="noti-title">
+                                                        New user
+                                                        registered
+                                                    </span>
+                                                </p>
+                                                <p class="noti-time">
+                                                    <span class="notification-time">8 mins ago</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="notification-message">
+                                    <a href="profile.html">
+                                        <div class="media d-flex">
+                                            <span class="avatar avatar-sm">
+                                                <img class="avatar-img rounded-circle" alt
+                                                     src="../../assets/img/profiles/avatar-04.jpg">
+                                            </span>
+                                            <div class="media-body">
+                                                <p class="noti-details">
+                                                    <span class="noti-title">Barbara Moore</span>
+                                                    declined the invoice <span class="noti-title">#RDW026896</span>
+                                                </p>
+                                                <p class="noti-time">
+                                                    <span class="notification-time">12 mins ago</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="notification-message">
+                                    <a href="profile.html">
+                                        <div class="media d-flex">
+                                            <div class="avatar avatar-sm">
+                                                <span class="avatar-title rounded-circle bg-info-light">
+                                                    <i class="far fa-comment"></i>
+                                                </span>
+                                            </div>
+                                            <div class="media-body">
+                                                <p class="noti-details">
+                                                    <span class="noti-title">
+                                                        You have received a new
+                                                        message
+                                                    </span>
+                                                </p>
+                                                <p class="noti-time">
+                                                    <span class="notification-time">2 days ago</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="topnav-dropdown-footer">
+                            <a href="notifications.html">View all Notifications</a>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item  has-arrow dropdown-heads ">
+                    <a href="javascript:void(0);" class="win-maximize">
+                        <i class="fa fa-arrows-alt"></i>
+                    </a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a href="javascript:void(0)" class="user-link  nav-link" data-bs-toggle="dropdown">
+                        <span class="user-img">
+                            <img src="../../assets/img/profiles/avatar-07.jpg" alt="img" class="profilesidebar">
+                            <span class="animate-circle"></span>
+                        </span>
+                        <span class="user-content">
+                            <span class="user-details">Usuario</span>
+                            <!--Aqui va el usuario que inicia sesión-->
+                            <span class="user-name">@ViewData["nombreUsaurio"]</span>
+                        </span>
+                    </a>
+                    <div class="dropdown-menu menu-drop-user">
+                        <div class="profilemenu">
+                            <div class="subscription-menu">
+                                <ul>
+                                    <li>
+                                        <a class="dropdown-item" href="profile.html">Perfil</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="subscription-logout">
+                                <ul>
+                                    <li class="pb-0">
+                                        <a class="dropdown-item" href="login.html">Cerrar Sesión</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+            </ul>
+            <!--TERMINA SECCION SUPERIOR-->
+
+
+        </div>
+
+        <!--INICIA MENU-->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <a href="index.html">
+                        <img src="../../assets/img/logo.png" class="img-fluid logo" alt>
+                    </a>
+                    <a href="index.html">
+                        <img src="../../assets/img/logo-small.png" class="img-fluid logo-small" alt>
+                    </a>
                 </div>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+            <div class="sidebar-inner slimscroll">
+                <div id="sidebar-menu" class="sidebar-menu">
+
+
+
+                    <!--1-->
+                    <ul>
+                        <li class="menu-title"><span>Inicio</span></li>
+                        <li>
+                            <a href="customers.html"><i class="fa fa-home"></i> <span>Dashboard</span></a>
+                        </li>
+                    </ul>
+                    <!--2-->
+                    <ul>
+                        <li class="menu-title"><span>Comercial</span></li>
+                        <li>
+                            <a href="@Url.Action("Index", "Clientes")"><i class="fa fa-list-ol"></i> <span>Clientes</span></a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index", "AgregarClientes")"><i class="fa fa-user-plus"></i> <span>Agregar Cliente</span></a>
+                        </li>
+
+
+                    </ul>
+                    <!--3-->
+                    <ul>
+                        <li class="menu-title"><span>Compras</span></li>
+                        <li>
+                            <a href="customers.html"><i class="fa fa-usd"></i> <span>Promociones</span></a>
+                        </li>
+                    </ul>
+                    <!--4-->
+                    <ul>
+                        <li class="menu-title"><span>Firma Electrónica</span></li>
+                        <li>
+                            <a href="customers.html"><i class="fa fa-upload"></i> <span>Subir Documento</span></a>
+                        </li>
+                        <li>
+                            <a href="customers.html"><i class="fa fa-map-pin"></i> <span>Destinatario</span></a>
+                        </li>
+                        <li>
+                            <a href="customers.html"><i class="fa fa-code-fork"></i> <span>Estatus</span></a>
+                        </li>
+                        <li>
+                            <a href="customers.html"><i class="fa fa-pencil"></i> <span>Firmas</span></a>
+                        </li>
+                    </ul>
+                    <!--5-->
+                    <ul>
+                        <li class="menu-title"><span>Recursos Humanos</span></li>
+                        <li>
+                            <a href="customers.html"><i class="fa fa-briefcase"></i> <span>Bolsa Trabajo</span></a>
+                        </li>
+                        <li>
+                            <a href="customers.html"><i class="fa fa-list"></i> <span>Reclutamiento</span></a>
+                        </li>
+                        <li>
+                            <a href="customers.html"><i class="fa fa-step-forward"></i> <span>Tracking RH</span></a>
+                        </li>
+                        <li>
+                            <a href="customers.html"><i class="fa fa-th"></i> <span>Catálogos</span></a>
+                        </li>
+                        <li>
+                            <a href="customers.html"><i class="fa fa-file"></i> <span>Reportes</span></a>
+                        </li>
+                        <li>
+                            <a href="customers.html"><i class="fa fa-download"></i> <span>Descarga Nómina</span></a>
+                        </li>
+                    </ul>
+                    <!--6-->
+                    <ul>
+                        <li class="menu-title"><span>Shopify</span></li>
+                        <li>
+                            <a href="customers.html"><i class="fa fa-users"></i> <span>Clientes</span></a>
+                        </li>
+                        <li>
+                            <a href="customers.html"><i class="fa fa-clipboard"></i> <span>Articulos</span></a>
+                        </li>
+                        <li>
+                            <a href="customers.html"><i class="fa fa-folder-open"></i> <span>Proveedores</span></a>
+                        </li>
+                        <li>
+                            <a href="customers.html"><i class="fa fa-pie-chart"></i> <span>Empaques</span></a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index", "ShopifyOrders")"><i class="fa fa-shopping-cart"></i> <span>Pedidos</span></a>
+                        </li>
+                    </ul>
+                    <!--7-->
+                    <ul>
+                        <li class="menu-title"><span>Sistema</span></li>
+
+                        <li>
+                            <a href="login.html"><i class="fa fa-power-off"></i> <span>Cerrar Sesión</span></a>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+        <!--TERMINA MENU-->
+
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - AppClientesMexaba - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+    <div class="container">
+        @RenderBody()
+    </div>
+
+    <div class="main-content">
+        @RenderSection("content", required: false)
+    </div>
+
+
+
+    <!-- Scripts generales -->
+    <script src="../../assets/js/jquery-3.7.0.min.js"></script>
+    <script src="../../assets/js/bootstrap.bundle.min.js"></script>
+    <script src="../../assets/js/feather.min.js"></script>
+    <script src="../../assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="../../assets/plugins/apexchart/apexcharts.min.js"></script>
+    <script src="../../assets/plugins/apexchart/chart-data.js"></script>
+    <script src="../../assets/js/script.js"></script>
+    <script src="https://cdn.datatables.net/1.11.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+
+
+    <!-- Aquí es donde se renderizarán los scripts de tus vistas -->
+    <div class="main-content">
+        @RenderSection("scripts", required: false)
+    </div>
+    
+
+
 </body>
+
+
 </html>

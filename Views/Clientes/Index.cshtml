@@ -1,0 +1,139 @@
+﻿@{
+    Layout = "_Layout"; // Establece el layout principal
+}
+
+
+<!--AQUI INICIA EN CONTENIDO UNICO DE LA VISTA -->
+@section content {
+    
+
+    <div class="page-wrapper">
+        <div class="content container-fluid">
+
+            <div class="page-header">
+                <div class="content-page-header">
+                    <h5>Clientes</h5>
+                    <div class="list-btn">
+                        <ul class="filter-list">
+                            <!--FILTRADO DEL TEMPLATE
+                            <li>
+                                <a class="btn btn-filters w-auto popup-toggle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Filter"><span class="me-2"><img src="assets/img/icons/filter-icon.svg" alt="filter"></span>Filter </a>
+                            </li>
+                            -->
+
+                            <li>
+                                <a class="btn btn-primary" href="add-customer.html"><i class="fa fa-plus-circle me-2" aria-hidden="true"></i>Agregar Cliente</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            @model List<AppClientesMexaba.Models.cxccli>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card-table">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <!-- Tabla de clientes -->
+                                <table id="TablaClientes" class="table table-center table-hover datatable">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Clave</th>
+                                            <th>Nombre</th>
+                                            <th>Teléfono</th>
+                                            <th>Segmento</th>
+                                            <th>Sucursal</th>
+                                            <th>RFC</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var cliente in Model.Select((value, index) => new { Value = value, Index = index + 1 }))
+                                        {
+                                            <tr>
+                                                <td>@cliente.Index</td>
+                                                <td>@cliente.Value.cve</td>
+                                                <td>@cliente.Value.nom</td>
+                                                <td>@cliente.Value.tel2</td>
+                                                <td>@cliente.Value.seg_mer</td>
+                                                <td>@cliente.Value.suc</td>
+                                                <td>@cliente.Value.rfc</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                                <!-- Fin de la tabla -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Controles de longitud de página e información de paginación fuera de la tabla -->
+            <div class="dataTables_length" id="TablaClientes_length">
+                <label>
+                    Mostrar
+                    <select id="page-length-select" class="form-select form-select-sm">
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                    registros por página
+                </label>
+            </div>
+            <!--<div class="dataTables_info" id="page-info"></div>-->
+        </div>
+    </div>
+}
+
+<!--AQUI TERMINA EN CONTENIDO UNICO DE LA VISTA -->
+
+
+
+
+<!--AQUI INICIA LA SECCIÓN DE SCRIPTS DE LA VISTA-->
+@section scripts {
+   
+
+    <script>
+        $(document).ready(function () {
+            var table = $('#TablaClientes').DataTable({
+                "pageLength": 20, // Establece la longitud de la página predeterminada
+                "language": {
+                    "lengthMenu": "Mostrar _MENU_ registros por página",
+                    "zeroRecords": "No se encontraron registros",
+                    "info": "Página _PAGE_ de _PAGES_",
+                    "infoEmpty": "No hay registros disponibles",
+                    "infoFiltered": "(filtrados de un total de _MAX_ registros)",
+                    "search": "Buscar:",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Último",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                }
+            });
+
+            // Configuración para habilitar la función de búsqueda
+            $('#search-input').on('keyup', function () {
+                table.search(this.value).draw();
+            });
+
+            // Configuración para habilitar la función de cambio de página
+            $('#TablaClientes').on('page.dt', function () {
+                var info = table.page.info();
+                $('#page-info').html('Página ' + (info.page + 1) + ' de ' + info.pages);
+            });
+
+            // Configuración para cambiar la longitud de la página
+            $('#page-length-select').on('change', function () {
+                table.page.len(this.value).draw();
+            });
+        });
+    </script>
+}
+
+<!--AQUI TERMINA LA SECCIÓN DE SCRIPTS DE LA VISTA-->
