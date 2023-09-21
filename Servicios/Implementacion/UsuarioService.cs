@@ -13,12 +13,22 @@ namespace AppClientesMexaba.Servicios.Implementacion
         {
             _DbContext = DbContext;
         }
-        
+
         //INICIA METODO PARA ENCONTRAR USUARIO
-        public async Task<Vusuario> GetVusuario(string nombre, string pwd)
+        public async Task<tcausr> GetTcausr(string nombre, string pwd)
         {
-            Vusuario usuario_encontrado = await _DbContext.Vusuarios.Where(u => u.nombre == nombre && u.pwd == pwd).FirstOrDefaultAsync();
-            return usuario_encontrado;
+            if (_DbContext.Tcausr != null)
+            {
+                tcausr usuario_encontrado = await _DbContext.Tcausr
+                    .Where(u => u.nombre == nombre && u.pwd == pwd)
+                    .FirstOrDefaultAsync();
+                return usuario_encontrado;
+            }
+            else
+            {
+                // Manejar la situación en la que _DbContext.Tcausr es nulo, por ejemplo, lanzando una excepción o devolviendo un valor predeterminado.
+                return null; // O manejar el error de acuerdo a tus necesidades.
+            }
         }
         //FINALIZA METODO PARA ENCONTRAR USUARIO
 
@@ -26,9 +36,9 @@ namespace AppClientesMexaba.Servicios.Implementacion
          REGISTRAR USUARIOS EN TIEMPO REAL EN LA BASE DE DATOS
          
        
-        public Task <Vusuario>SaveUsuario(Vusuario modelo)
+        public Task <Tcausr>SaveUsuario(Vusuario modelo)
         {
-            _DbContext.Vusuarios.Add(modelo);
+            _DbContext.Tcausr.Add(modelo);
             await _DbContext.SaveChangesAsync();
             return modelo;
         }

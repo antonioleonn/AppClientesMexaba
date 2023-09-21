@@ -6,7 +6,7 @@ namespace AppClientesMexaba.Servicios.Contrato
     public interface IUsuarioService
     {
         //SE UTILIZA TASK PARA TRABAJAR DE FORMA ASINCRONA
-        Task<Vusuario> GetVusuario(string nombre, string pwd);
+        Task<tcausr> GetTcausr(string nombre, string pwd);
 
         /*EJEMPLO DE METODO PARA PROYECTO QUE SI NECESITEN
          * REGISTRAR USUARIOS EN TIEMPO REAL EN LA BASE DE DATOS

@@ -15,18 +15,18 @@ public partial class ClContext : DbContext
     {
     }
 
-    public virtual DbSet<Vusuario> Vusuarios { get; set; }
+    public virtual DbSet<tcausr> Tcausr { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     { }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Vusuario>(entity =>
+        modelBuilder.Entity<tcausr>(entity =>
         {
             entity
                 .HasNoKey()
-                .ToView("vusuarios");
+                .ToView("tcausr");
 
             entity.Property(e => e.cia_ventas)
                 .HasMaxLength(3)

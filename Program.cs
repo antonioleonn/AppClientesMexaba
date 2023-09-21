@@ -6,6 +6,10 @@ using AppClientesMexaba.Servicios.Implementacion;
 
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
+using Toolbelt.Extensions.DependencyInjection;
+using AppClientesMexaba.Data;
+
+using System.Net.Http;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,12 +19,19 @@ builder.Services.AddControllersWithViews();
 
 //INICIA CADENA DE CONEXIÓN SQLSERVER
 builder.Services.AddDbContext<ClContext>(options => {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("CadenaSQL"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("CadenaAut"));
     });
 //FINALIZA CADENA DE CONEXIÓN SQLSERVER
 
 //INICIA LA UTILIZACIÓN DE CLASES DE SERVICIOS
+builder.Configuration.AddJsonFile("appsettings.json");
+
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+builder.Services.AddScoped<D_Cxccli>();
+
+builder.Services.AddHttpClient();
+builder.Services.AddScoped<D_ShopifyOrders>();
+
 //FINALIZA LA UTILIZACIÓN DE CLASES DE SERVICIOS
 
 // INICIA EL AÑADIR LA COOKIE DE LOGIN
@@ -55,7 +66,10 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+
+
 app.UseHttpsRedirection();
+
 app.UseStaticFiles();
 
 app.UseRouting();
@@ -64,6 +78,9 @@ app.UseRouting();
 app.UseAuthentication();
 
 app.UseAuthorization();
+
+app.UseCssLiveReload();
+
 
 app.MapControllerRoute(
     name: "default",

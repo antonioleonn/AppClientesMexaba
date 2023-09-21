@@ -58,7 +58,7 @@ namespace AppClientesMexaba.Controllers
         [HttpPost]
         public async Task<IActionResult> IniciarSesion(string nombre, string pwd)
         {
-            Vusuario usuario_encontrado = await _usuarioServicio.GetVusuario(nombre, pwd);
+            tcausr usuario_encontrado = await _usuarioServicio.GetTcausr(nombre, pwd);
 
             if(usuario_encontrado == null)
             {
