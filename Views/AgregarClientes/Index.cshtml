@@ -4,15 +4,6 @@
 }
 
 
-
- 
-
-
-
-   
-
-
-
 <!--AQUI INICIA EN CONTENIDO UNICO DE LA VISTA -->
 @section content {
 
@@ -29,7 +20,10 @@
                 <div class="col-md-12">
                     <form action="add-customer.html#">
                         <div class="card-body">
-                            <div class="form-group-item">
+
+
+                            <!--INICIA SECCION 1 DE CAPTURA DE CLIENTE-->
+                            <div id="seccion1" class="form-group-item">
                                 <h5 class="form-title">Información para pre-alta</h5>
                                 <div class="row">
                                     <div class="col-lg-4 col-md-6 col-sm-12">
@@ -86,13 +80,52 @@
                                             <input type="text" id="mobile_code" class="form-control" placeholder="">
                                         </div>
                                     </div>
+
+                                    <!--INICIA BOTON ACCION DE VERIFICACION CON TWILIO-->
                                     <div class="billing-btn">
                                         <h5 class="form-title mb-0">Verificar número</h5>
                                         <a href="add-customer.html#" class="btn btn-primary">Enviar</a>
                                     </div>
+                                    <!--TERMINA BOTON ACCION DE VERIFICACION CON TWILIO-->
+
+
+
                                 </div>
                             </div>
+                            <!--TERMINA SECCION 1 DE CAPTURA DE CLIENTE-->
 
+
+
+
+                            <!-- INICIA MODAL PARA INGRESAR CODIGO DE VERIFICACION -->
+                            <div class="modal fade" id="modalCodigoVerificacion" tabindex="-1" role="dialog" aria-labelledby="modalCodigoVerificacionLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="modalCodigoVerificacionLabel">Verificación de Código</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <!-- Campo para ingresar el código de verificación -->
+                                            <div class="form-group">
+                                                <label>Código de Verificación</label>
+                                                <input type="text" class="form-control" id="codigoVerificacion" placeholder="Ingrese el código">
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                            <button type="button" class="btn btn-primary" id="guardarRegistro">Guardar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- TERMINA MODAL PARA INGRESAR CODIGO DE VERIFICACION -->
+
+
+
+                            <!--INICIA SECCION 2 DE CAPTURA DE CLIENTE-->
                             <div class="form-group-customer customer-additional-form">
                                 <div class="row">
                                     <h5 class="form-title">Continuar con el registro del Cliente</h5>
@@ -123,10 +156,16 @@
                                     </div>
                                 </div>
                             </div>
+
+
+
                             <div class="add-customer-btns text-end">
                                 <a href="customers.html" class="btn customer-btn-cancel">Cancelar</a>
                                 <a href="customers.html" class="btn customer-btn-save">Guardar</a>
                             </div>
+                            <!--TERMINA SECCION 2 DE CAPTURA DE CLIENTE-->
+
+
                         </div>
                     </form>
                 </div>
@@ -135,3 +174,42 @@
     </div>
 }
 <!--AQUI TERMINA EN CONTENIDO UNICO DE LA VISTA -->
+
+
+
+
+<!--AQUI INICIA LA SECCIÓN DE SCRIPTS DE LA VISTA-->
+@section scripts {
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="~/assets/js/RegistroCliente.js"></script>
+
+
+
+
+    <!-- Script para mostrar la segunda sección después de la verificación -->
+    <script>
+        $(document).ready(function () {
+            // Deshabilitar la segunda sección al cargar la página
+            $('.segunda-seccion input').prop('disabled', true);
+
+            // Manejar clic en el botón "Enviar"
+            $('#enviar-btn').click(function () {
+                var numeroCelular = $('#numeroCelular').val();
+
+                // Realizar la solicitud al controlador para enviar la verificación
+                $.post("/TuControlador/EnviarCodigoVerificacion", { numeroCelular: numeroCelular }, function (data) {
+                    // Si la verificación se envió con éxito, habilitar la segunda sección
+                    if (data.success) {
+                        $('.segunda-seccion input').prop('disabled', false);
+                    } else {
+                        // Manejar otros casos, como errores de verificación
+                        alert("Error al enviar la verificación");
+                    }
+                });
+            });
+        });
+    </script>
+
+
+}
+<!--AQUI TERMINA LA SECCIÓN DE SCRIPTS DE LA VISTA-->
