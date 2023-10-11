@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@RenderBody()﻿
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -244,7 +245,7 @@
                     <ul>
                         <li class="menu-title"><span>Inicio</span></li>
                         <li>
-                            <a href="customers.html"><i class="fa fa-home"></i> <span>Dashboard</span></a>
+                            <a href="@Url.Action("Index", "Home")"><i class="fa fa-home"></i> <span>Dashboard</span></a>
                         </li>
                     </ul>
                     <!--2-->
@@ -254,7 +255,7 @@
                             <a href="@Url.Action("Index", "Clientes")"><i class="fa fa-list-ol"></i> <span>Clientes</span></a>
                         </li>
                         <li>
-                            <a href="@Url.Action("Index", "AgregarClientes")"><i class="fa fa-user-plus"></i> <span>Agregar Cliente</span></a>
+                            <a href="@Url.Action("Agregar", "Clientes")"><i class="fa fa-user-plus"></i> <span>Agregar Cliente</span></a>
                         </li>
 
 
@@ -304,26 +305,8 @@
                             <a href="customers.html"><i class="fa fa-download"></i> <span>Descarga Nómina</span></a>
                         </li>
                     </ul>
+                  
                     <!--6-->
-                    <ul>
-                        <li class="menu-title"><span>Shopify</span></li>
-                        <li>
-                            <a href="customers.html"><i class="fa fa-users"></i> <span>Clientes</span></a>
-                        </li>
-                        <li>
-                            <a href="customers.html"><i class="fa fa-clipboard"></i> <span>Articulos</span></a>
-                        </li>
-                        <li>
-                            <a href="customers.html"><i class="fa fa-folder-open"></i> <span>Proveedores</span></a>
-                        </li>
-                        <li>
-                            <a href="customers.html"><i class="fa fa-pie-chart"></i> <span>Empaques</span></a>
-                        </li>
-                        <li>
-                            <a href="@Url.Action("Index", "ShopifyOrders")"><i class="fa fa-shopping-cart"></i> <span>Pedidos</span></a>
-                        </li>
-                    </ul>
-                    <!--7-->
                     <ul>
                         <li class="menu-title"><span>Sistema</span></li>
 
@@ -337,10 +320,6 @@
         </div>
         <!--TERMINA MENU-->
 
-    </div>
-
-    <div class="container">
-        @RenderBody()
     </div>
 
     <div class="main-content">
@@ -359,14 +338,13 @@
     <script src="../../assets/js/script.js"></script>
     <script src="https://cdn.datatables.net/1.11.6/js/jquery.dataTables.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 
 
     <!-- Aquí es donde se renderizarán los scripts de tus vistas -->
     <div class="main-content">
         @RenderSection("scripts", required: false)
     </div>
-    
+
 
 
 </body>

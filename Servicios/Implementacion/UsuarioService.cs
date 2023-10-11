@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using AppClientesMexaba.Models;
 using AppClientesMexaba.Servicios.Contrato;
+using AppClientesMexaba.Exceptions;
 
 namespace AppClientesMexaba.Servicios.Implementacion
 {
@@ -17,19 +18,20 @@ namespace AppClientesMexaba.Servicios.Implementacion
         //INICIA METODO PARA ENCONTRAR USUARIO
         public async Task<tcausr> GetTcausr(string nombre, string pwd)
         {
-            if (_DbContext.Tcausr != null)
+            var usuario_encontrado = await _DbContext.Tcausr
+                .Where(u => u.nombre == nombre && u.pwd == pwd)
+                .FirstOrDefaultAsync();
+
+            if (usuario_encontrado == null)
             {
-                tcausr usuario_encontrado = await _DbContext.Tcausr
-                    .Where(u => u.nombre == nombre && u.pwd == pwd)
-                    .FirstOrDefaultAsync();
-                return usuario_encontrado;
+                // Aquí podrías lanzar una excepción o devolver un objeto que represente la falta de usuario.
+                // Puedes personalizar según tus necesidades y políticas de manejo de errores.
+                throw new UsuarioNoEncontradoException("El usuario no se encontró.");
             }
-            else
-            {
-                // Manejar la situación en la que _DbContext.Tcausr es nulo, por ejemplo, lanzando una excepción o devolviendo un valor predeterminado.
-                return null; // O manejar el error de acuerdo a tus necesidades.
-            }
+
+            return usuario_encontrado;
         }
+
         //FINALIZA METODO PARA ENCONTRAR USUARIO
 
         /*INICIA METODO DE EJEMPLO PARA PROYECTOS QUE SI NECESITEN

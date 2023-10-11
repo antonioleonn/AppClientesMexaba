@@ -8,8 +8,15 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Toolbelt.Extensions.DependencyInjection;
 using AppClientesMexaba.Data;
+using System;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 
 using System.Net.Http;
+using static AppClientesMexaba.Models.ClContext;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,11 +24,23 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 
-//INICIA CADENA DE CONEXIÓN SQLSERVER
+//INICIA CADENA DE CONEXIÓN SQLSERVER PRINCIPAL PARA AUTENTICACION 
 builder.Services.AddDbContext<ClContext>(options => {
     options.UseSqlServer(builder.Configuration.GetConnectionString("CadenaAut"));
-    });
-//FINALIZA CADENA DE CONEXIÓN SQLSERVER
+});
+//FINALIZA CADENA DE CONEXIÓN SQLSERVER PARA AUTENTICACION
+
+//INICIA CADENA DE CONEXIÓN SQLSERVER PARA SERVIDOR ACA
+builder.Services.AddDbContext<ServidorACADbContext>(options => {
+    options.UseSqlServer(builder.Configuration.GetConnectionString("ServidorACA"));
+});
+//FINALIZA CADENA DE CONEXIÓN SQLSERVER PARA SERVIDOR ACA
+
+//INICIA CADENA DE CONEXIÓN SQLSERVER PARA SERVIDOR ALV
+builder.Services.AddDbContext<ServidorALVDbContext>(options => {
+    options.UseSqlServer(builder.Configuration.GetConnectionString("ServidorALV"));
+});
+//FINALIZA CADENA DE CONEXIÓN SQLSERVER PARA SERVIDOR ALV
 
 //INICIA LA UTILIZACIÓN DE CLASES DE SERVICIOS
 builder.Configuration.AddJsonFile("appsettings.json");
@@ -30,9 +49,12 @@ builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<D_Cxccli>();
 
 builder.Services.AddHttpClient();
-builder.Services.AddScoped<D_ShopifyOrders>();
+builder.Services.AddControllersWithViews();
+builder.Services.AddHttpContextAccessor();
 
 //FINALIZA LA UTILIZACIÓN DE CLASES DE SERVICIOS
+
+
 
 // INICIA EL AÑADIR LA COOKIE DE LOGIN
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -82,8 +104,14 @@ app.UseAuthorization();
 app.UseCssLiveReload();
 
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Inicio}/{action=IniciarSesion}/{id?}");
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Inicio}/{action=IniciarSesion}/{id?}");
+
+});
+
+
 
 app.Run();

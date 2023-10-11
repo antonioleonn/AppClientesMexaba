@@ -16,7 +16,7 @@ namespace AppClientesMexaba.Data
             _configuration = configuration;
         }
 
-        //LISTADO DE CLIENTES Y CONEXION SQLSERVER VISTA VCLIENTES
+        //LISTADO DE USUARIOS
         public List<tcausr> Listar()
         {
             List<tcausr> lista = new List<tcausr>();

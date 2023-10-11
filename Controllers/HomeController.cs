@@ -17,8 +17,8 @@ namespace AppClientesMexaba.Controllers
         private readonly ILogger<HomeController> _logger;
 
 
-        
-        
+
+
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
@@ -29,10 +29,10 @@ namespace AppClientesMexaba.Controllers
             ClaimsPrincipal claimuser = HttpContext.User;
             string nombreUsuario = "";
 
-            if(claimuser.Identity.IsAuthenticated)
+            if (claimuser.Identity.IsAuthenticated)
             {
-                nombreUsuario = claimuser.Claims.Where(c=> c.Type == ClaimTypes.Name)
-                    .Select(c=>c.Value).SingleOrDefault();
+                nombreUsuario = claimuser.Claims.Where(c => c.Type == ClaimTypes.Name)
+                    .Select(c => c.Value).SingleOrDefault();
             }
 
             ViewData["nombreUsaurio"] = nombreUsuario;
@@ -53,12 +53,12 @@ namespace AppClientesMexaba.Controllers
 
         //SE GENERA MENU Y EVENTO DE CERRAR SESIÓN EN LA APLICACIÓN
         //SE TRABAJA DE FORMA ASINCRONA ES POR ESO EL TASK
-        public async Task <IActionResult> CerrarSesion()
-        {   
+        public async Task<IActionResult> CerrarSesion()
+        {
             //Borramos autenticación
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             //REDIRECCIONAR 
-            return RedirectToAction("IniciarSesion","Inicio");
+            return RedirectToAction("IniciarSesion", "Inicio");
         }
     }
 }

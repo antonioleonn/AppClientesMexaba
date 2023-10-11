@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authentication;
 namespace AppClientesMexaba.Controllers
 {
     public class InicioController : Controller
-    {   
+    {
         private readonly IUsuarioService _usuarioServicio;
 
         public InicioController(IUsuarioService usuarioServicio)
@@ -60,14 +60,14 @@ namespace AppClientesMexaba.Controllers
         {
             tcausr usuario_encontrado = await _usuarioServicio.GetTcausr(nombre, pwd);
 
-            if(usuario_encontrado == null)
+            if (usuario_encontrado == null)
             {
                 ViewData["Mensaje"] = "No se encontraron coincidencias";
                 return View();
             }
 
             //CONFIGURAR AUTENTICACIÓN DEL USUARIO
-            List <Claim> claims = new List<Claim>()
+            List<Claim> claims = new List<Claim>()
             {
                 new Claim(ClaimTypes.Name,usuario_encontrado.nombre_lar)
             };
@@ -84,7 +84,7 @@ namespace AppClientesMexaba.Controllers
                 properties
                 );
 
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
         }
     }
 }
