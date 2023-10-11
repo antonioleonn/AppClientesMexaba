@@ -1,0 +1,230 @@
+﻿@{
+    Layout = "_Layout"; // Establece el layout principal
+}
+
+
+
+
+
+
+<!--AQUI INICIA EN CONTENIDO UNICO DE LA VISTA -->
+@section content {
+
+
+        <<div class="page-wrapper">
+        <div class="content container-fluid">
+
+            <div class="page-header">
+                <div class="content-page-header">
+                    <h5>Agregar Cliente</h5>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <form action="add-customer.html#">
+                        <div class="card-body">
+                            <!--INICIA FORMULARIO DE PRE-REGISTRO-->
+                            <div class="form-group-item">
+                                <h5 class="form-title">Paso 1</h5>
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label>Nombre Completo</label>
+                                            <input type="text" class="form-control"
+                                                   placeholder="Nombre(s), apellido paterno y apellido materno">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label>Código Postal</label>
+                                            <input type="text" class="form-control" placeholder="Código Postal" id="codigoPostal">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label>Celular</label>
+                                            <input type="text" class="form-control" placeholder="Celular"
+                                                   id="celular">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label>Calle y Número</label>
+                                            <input type="text" class="form-control" placeholder="Dirección">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label>Ciudad</label>
+                                            <input type="text" class="form-control" placeholder="Ciudad" id="ciudad" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label>Estado</label>
+                                            <input type="text" class="form-control" placeholder="Estado" id="estado">
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                            <div class="add-customer-btns text-end">
+                                <a href="customers.html" class="btn customer-btn-cancel">Cancelar</a>
+                                <a href="btnVerificarCelular" class="btn customer-btn-save">Verificar número de celular</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    <!--INICIA MODAL-->
+    <!-- Modal para el código de verificación -->
+    <div class="modal fade" id="modalCodigoVerificacion" tabindex="-1" role="dialog" aria-labelledby="modalCodigoVerificacionLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalCodigoVerificacionLabel">Verificación de Teléfono</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="codigoVerificacion">Ingresa el código de verificación:</label>
+                        <input type="text" class="form-control" id="codigoVerificacion">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" id="btnVerificarCodigo">Verificar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--TERMINA MODAL-->
+
+
+
+
+    }
+
+<!--AQUI TERMINA EN CONTENIDO UNICO DE LA VISTA -->
+
+
+<!--AQUI INICIA LA SECCIÓN DE SCRIPTS DE LA VISTA-->
+@section scripts {
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+
+
+    <!--ESTE SCRIPT ES LA LOGICA AJAX DE LA BUSQUEDA Y EL AUTOLLENADO DEL CODIGO POSTAL Y DE ESTADOS-->
+    <script>
+        $(document).ready(function () {
+            // Función que se ejecuta cuando cambia el valor del campo de código postal
+            $("#codigoPostal").on("input", function () {
+                var codigoPostal = $(this).val();
+
+                // Realizar la llamada AJAX al servidor
+                $.ajax({
+                    url: "@Url.Action("ObtenerEstadoPorCodigoPostal", "Clientes")", // Reemplaza la URL con la ruta real de tu controlador y acción
+                    type: "POST",
+                    data: { codigoPostal: codigoPostal },
+                    success: function (result) {
+                        // Llenar el campo de estado con el resultado de la llamada
+                        $("#estado").val(result);
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        console.error("Error al obtener información del código postal:", errorThrown);
+                        // Puedes mostrar un mensaje en el formulario
+                        $("#estado").val("Error al obtener información del código postal");
+                    }
+                });
+            });
+        });
+    </script>
+
+    <!--ESTE SCRIPT ES LA LOGICA AJAX DEL AUTOLLENADO DE LA CIUDAD-->
+    <script>
+        $(function () {
+            $("#ciudad").autocomplete({
+                source: function (request, response) {
+                    // Realiza una llamada AJAX al servidor para obtener la lista de ciudades
+                    $.ajax({
+                        url: "@Url.Action("ObtenerCiudades", "Clientes")",
+                        type: "GET",
+                        data: { term: request.term }, // 'term' es el término de búsqueda
+                        success: function (data) {
+                            response(data); // La respuesta debe ser una lista de nombres de ciudades
+                        }
+                    });
+                },
+                minLength: 2, // Número mínimo de caracteres antes de que se realice la búsqueda
+                select: function (event, ui) {
+                    // Este código se ejecuta cuando el usuario selecciona una ciudad de la lista
+                    console.log("Seleccionó la ciudad: " + ui.item.value);
+                    // Asignar el valor seleccionado al campo 'ciudad' si es necesario
+                    $("#ciudad").val(ui.item.value);
+                }
+            });
+        });
+    </script>
+
+    <!--ESTE SCRIPT ES LA LOGICA DE VERIFICACIÓN CON TWILIO-->
+    <script>
+        $("#btnVerificarCelular").click(function () {
+            var celular = $("#celular").val();
+
+            $.ajax({
+                url: "/TuControlador/VerificarCelular",
+                type: "POST",
+                data: { celular: celular },
+                success: function (response) {
+                    alert(response.mensaje);
+                    // Mostrar un modal para que el usuario ingrese el código de verificación
+                    $("#modalCodigoVerificacion").modal("show");
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.error("Error al verificar el celular:", errorThrown);
+                }
+            });
+        });
+
+
+        $("#btnVerificarCodigo").click(function () {
+            var codigoVerificacion = $("#codigoVerificacion").val();
+            var codigoVerificacionSesion = "@HttpContext.Session.GetString("CodigoVerificacion")";
+
+            if (codigoVerificacion === codigoVerificacionSesion) {
+                // Código de verificación válido, ocultar el modal y mostrar la segunda parte del formulario
+                $("#modalCodigoVerificacion").modal("hide");
+                $("#segundaParteFormulario").show(); // Reemplaza con el ID real de la segunda parte del formulario
+            } else {
+                alert("Código de verificación incorrecto. Por favor, inténtalo nuevamente.");
+            }
+        });
+
+
+    </script>
+
+
+
+    }
+
+<!--AQUI TERMINA LA SECCIÓN DE SCRIPTS DE LA VISTA-->

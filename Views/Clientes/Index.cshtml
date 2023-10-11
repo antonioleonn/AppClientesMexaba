@@ -22,7 +22,7 @@
                             -->
 
                             <li>
-                                <a class="btn btn-primary" href="add-customer.html"><i class="fa fa-plus-circle me-2" aria-hidden="true"></i>Agregar Cliente</a>
+                                <a class="btn btn-primary" href="@Url.Action("Agregar", "Clientes")"><i class="fa fa-plus-circle me-2" aria-hidden="true"></i>Agregar Cliente</a>
                             </li>
                         </ul>
                     </div>
@@ -43,10 +43,12 @@
                                             <th>#</th>
                                             <th>Clave</th>
                                             <th>Nombre</th>
-                                            <th>Teléfono</th>
-                                            <th>Segmento</th>
-                                            <th>Sucursal</th>
                                             <th>RFC</th>
+                                            <th>Segmento</th>
+                                            <th>Teléfono</th>
+                                            <th>Correo</th>
+                                            <th>Sucursal</th>
+                                            
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -56,10 +58,12 @@
                                                 <td>@cliente.Index</td>
                                                 <td>@cliente.Value.cve</td>
                                                 <td>@cliente.Value.nom</td>
-                                                <td>@cliente.Value.tel2</td>
-                                                <td>@cliente.Value.seg_mer</td>
-                                                <td>@cliente.Value.suc</td>
                                                 <td>@cliente.Value.rfc</td>
+                                                <td>@cliente.Value.seg_mer</td>
+                                                <td>@cliente.Value.tel2</td>
+                                                <td>@cliente.Value.Mail1</td>
+                                                <td>@cliente.Value.suc</td>
+                                                
                                             </tr>
                                         }
                                     </tbody>
@@ -83,7 +87,7 @@
                     registros por página
                 </label>
             </div>
-            <!--<div class="dataTables_info" id="page-info"></div>-->
+            <div class="dataTables_info" id="page-info"></div>
         </div>
     </div>
 }
@@ -134,6 +138,20 @@
             });
         });
     </script>
+
+    <script>
+        function mostrarFormulario() {
+            // Cargar la vista parcial del formulario en el contenedor modal
+            $("#verificacion-partial-container").load('@Url.Action("Index", "AgregarClientes")', function () {
+                // Mostrar el modal
+                $('#verificacionModal').modal('show');
+            });
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.6/js/jquery.dataTables.min.js"></script>
+
 }
 
 <!--AQUI TERMINA LA SECCIÓN DE SCRIPTS DE LA VISTA-->
